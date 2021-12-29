@@ -1,0 +1,15 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: hello-world
+spec:
+  steps:
+    - name: echo
+      image: registry.access.redhat.com/ubi8/ubi-micro:latest
+      script: |
+        #!/usr/bin/env bash
+        set -xe
+        echo "Hello World!"
+
+        id
+        ls -la
