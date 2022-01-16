@@ -1,0 +1,12 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: ci-golang
+spec:
+  serviceAccountName: default
+  triggers:
+    - name: trigger-ci-golang
+      bindings:
+        - ref: ci-golang
+      template:
+        ref: ci-golang
