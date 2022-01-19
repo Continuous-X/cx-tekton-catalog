@@ -5,7 +5,7 @@
 NAMESPACE=$1
 TASKNAME=$2
 scriptname=$(basename "$0")
-basepath=$(cd $(dirname "$0") && pwd)
+basepath=$(dirname "$0")
 source ${basepath}/common.sh
 
 
@@ -14,16 +14,19 @@ function help() {
 }
 
 
-function installTask()
+function installTests()
 {
     for versionPath in ${basepath}/../task/${TASKNAME}/*
     do
         echo "[INFO] take ${versionPath}"
-        kubectl apply -f "${versionPath}/" -n "${NAMESPACE}"
+        kubectl apply -f "${versionPath}" -n "${NAMESPACE}"
     done
 }
 
 checkParam1 "$@"
 checkParam2 "$@"
 
-installTask
+source ${basepath}/task-install.sh "$@"
+source ${basepath}/task-test-delete.sh "$@"
+
+installTests

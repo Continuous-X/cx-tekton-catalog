@@ -1,7 +1,8 @@
 apiVersion: tekton.dev/v1beta1
 kind: TaskRun
 metadata:
-  name: hello-world-test-run
+  name: hello-world-test-run-0.1
 spec:
+  serviceAccountName: pipeline
   taskRef:
-    name: hello-world
+    name: hello-world-0.1

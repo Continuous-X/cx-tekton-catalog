@@ -3,20 +3,20 @@
 #set -x
 
 NAMESPACE=$1
-TASKNAME=$2
+PIPELINE=$2
 scriptname=$(basename "$0")
-basepath=$(cd $(dirname "$0") && pwd)
+basepath=$(dirname "$0")
 source ${basepath}/common.sh
 
 
 function help() {
-    echo "[HELP] call script '${scriptname}' with <NAMESPACE> <TASKNAME>"
+    echo "[HELP] call script '${scriptname}' with <NAMESPACE> <PIPELINE>"
 }
 
 
-function installTask()
+function installPipeline()
 {
-    for versionPath in ${basepath}/../task/${TASKNAME}/*
+    for versionPath in ${basepath}/../pipeline/${PIPELINE}/*
     do
         echo "[INFO] take ${versionPath}"
         kubectl apply -f "${versionPath}/" -n "${NAMESPACE}"
@@ -26,4 +26,4 @@ function installTask()
 checkParam1 "$@"
 checkParam2 "$@"
 
-installTask
+installPipeline

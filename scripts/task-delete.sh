@@ -14,16 +14,16 @@ function help() {
 }
 
 
-function installTask()
+function deleteTask()
 {
     for versionPath in ${basepath}/../task/${TASKNAME}/*
     do
         echo "[INFO] take ${versionPath}"
-        kubectl apply -f "${versionPath}/" -n "${NAMESPACE}"
+        kubectl delete -f "${versionPath}/" -n "${NAMESPACE}"
     done
 }
 
 checkParam1 "$@"
 checkParam2 "$@"
 
-installTask
+deleteTask

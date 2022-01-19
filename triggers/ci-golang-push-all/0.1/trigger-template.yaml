@@ -1,7 +1,7 @@
 apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerTemplate
 metadata:
-  name: ci-golang
+  name: ci-golang-0.1
 spec:
   params:
     - name: gitrevision
@@ -15,11 +15,11 @@ spec:
       metadata:
         generateName: ci-golang-
         labels:
-          tekton.dev/pipeline: ci-golang
+          tekton.dev/pipeline: ci-golang-0.1
       spec:
         serviceAccountName: pipeline
         pipelineRef:
-          name: ci-golang
+          name: ci-golang-0.1
         params:
           - name: github-repo-url
             value: '$(tt.params.gitrepositoryurl)'

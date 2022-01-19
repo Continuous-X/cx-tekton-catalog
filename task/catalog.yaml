@@ -1,0 +1,2 @@
+git-clone: 'https://raw.githubusercontent.com/tektoncd/catalog/main/task/git-clone/0.5/git-clone.yaml'
+generate-build-id: 'https://raw.githubusercontent.com/tektoncd/catalog/main/task/generate-build-id/0.1/generate-build-id.yaml'
