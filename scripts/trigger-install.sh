@@ -5,7 +5,7 @@
 NAMESPACE=$1
 TASKNAME=$2
 scriptname=$(basename "$0")
-basepath=$(dirname "$0")
+basepath=$(cd $(dirname "$0") && pwd)
 source ${basepath}/common.sh
 
 
@@ -13,16 +13,17 @@ function help() {
     echo "[HELP] call script '${scriptname}' with <NAMESPACE> <TASKNAME>"
 }
 
-function deleteTests()
+
+function installTrigger()
 {
-    for versionPath in ${basepath}/../task/${TASKNAME}/*
+    for versionPath in ${basepath}/../trigger/${TASKNAME}/*
     do
-        echo "[INFO] take ${versionPath}/test"
-        kubectl delete -f "${versionPath}/test/" -n "${NAMESPACE}"
+        echo "[INFO] take ${versionPath}"
+        kubectl apply -f "${versionPath}/" -n "${NAMESPACE}"
     done
 }
 
 checkParam1 "$@"
 checkParam2 "$@"
 
-deleteTests
+installTrigger

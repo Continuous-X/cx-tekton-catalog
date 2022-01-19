@@ -20,7 +20,7 @@ cx-tekton-catalog
 │   └── pipeline-name               - Verzeichnis zu einer Pipeline
 │       └── pipeline-version        - Verzeichnis zu einer Version der Pipeline
 │           ├── pipeline-name.yaml  - Datei zu einer Pipeline
-│           └── tests               - Verzeichnis mit Dateien für die Tests zur Pipeline
+│           └── test                - Verzeichnis mit Dateien für die Tests zur Pipeline
 │               ├── resources.yaml  - Ressourcen, die für die Tests benötigt werden - z.B. PVC, Deployment, ServiceAccount, etc.
 │               └── run.yaml        - PipelineRun(s) die den, die Tests ausführen
 |
@@ -31,7 +31,7 @@ cx-tekton-catalog
 │   └── task-name                   - Verzeichnis zu einer Task
 │       └── task-version            - Verzeichnis zu einer Version der Task
 │           ├── task-name.yaml      - Datei zu einer Task
-│           └── tests               - Verzeichnis mit Dateien für die Tests zur Pipeline
+│           └── test                - Verzeichnis mit Dateien für die Tests zur Pipeline
 │               ├── resources.yaml  - Ressourcen, die für die Tests benötigt werden - z.B. PVC, Deployment, ServiceAccount, etc.
 │               └── run.yaml        - TaskRun(s) die den, die Tests ausführen
 |

@@ -18,8 +18,8 @@ function installTests()
 {
     for versionPath in ${basepath}/../task/${TASKNAME}/*
     do
-        echo "[INFO] take ${versionPath}"
-        kubectl apply -f "${versionPath}" -n "${NAMESPACE}"
+        echo "[INFO] take ${versionPath}/test"
+        kubectl apply -f "${versionPath}/test" -n "${NAMESPACE}"
     done
 }
 
