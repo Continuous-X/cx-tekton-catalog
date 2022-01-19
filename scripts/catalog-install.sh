@@ -18,12 +18,14 @@ source ${basepath}/task-install-all.sh "$@"
 source ${basepath}/pipeline-install-all.sh "$@"
 
 echo """
+
 check tasks in namespace '${NAMESPACE}':
 ----------------------------------------
 """
 kubectl get tasks -n "${NAMESPACE}"
 
 echo """
+
 check pipelines in namespace '${NAMESPACE}':
 --------------------------------------------
 """
