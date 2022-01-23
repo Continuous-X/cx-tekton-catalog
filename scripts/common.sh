@@ -15,3 +15,47 @@ function checkParam2() {
         exit 1
     fi
 }
+
+function getTektonSourcesInNamespace() {
+    echo """
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+Get Tekton Sources in '$1'
+===========================
+
+    tasks in namespace '$1':
+    ----------------------------------------
+    """
+    kubectl get tasks -n "$1"
+
+    echo """
+
+    pipelines in namespace '$1':
+    --------------------------------------------
+    """
+    kubectl get pipelines -n "$1"
+
+    echo """
+
+    trigger-templates in namespace '$1':
+    --------------------------------------------
+    """
+    kubectl get tt -n "$1"
+
+    echo """
+
+    trigger-bindings in namespace '$1':
+    --------------------------------------------
+    """
+    kubectl get tb -n "$1"
+
+    echo """
+
+    event-listener in namespace '$1':
+    --------------------------------------------
+    """
+    kubectl get el -n "$1"
+
+    echo """
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    """
+}

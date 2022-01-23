@@ -16,15 +16,6 @@ checkParam1 "$@"
 
 source ${basepath}/task-delete-all.sh "$@"
 source ${basepath}/pipeline-delete-all.sh "$@"
+source ${basepath}/trigger-delete-all.sh "$@"
 
-echo """
-check tasks in namespace '${NAMESPACE}':
-----------------------------------------
-"""
-kubectl get tasks -n "${NAMESPACE}"
-
-echo """
-check pipelines in namespace '${NAMESPACE}':
---------------------------------------------
-"""
-kubectl get pipelines -n "${NAMESPACE}"
+getTektonSourcesInNamespace "${NAMESPACE}"
