@@ -6,7 +6,7 @@ metadata:
   name: "tekton-catalog-config-0.1.0"
   namespace: "local-cicd-helheim"
   annotations:
-    installdate: 2022-01-28T14:14:12
+    installdate: 2022-01-28T14:24:30
   labels:
     app: "tekton-catalog-config"
     version: "0.1.0"

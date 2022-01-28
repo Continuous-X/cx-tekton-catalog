@@ -14,6 +14,7 @@ function help() {
 
 checkParam1 "$@"
 
+source ${basepath}/config-delete-all.sh "$@"
 source ${basepath}/task-delete-all.sh "$@"
 source ${basepath}/pipeline-delete-all.sh "$@"
 source ${basepath}/trigger-delete-all.sh "$@"
