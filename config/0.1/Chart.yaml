@@ -1,0 +1,16 @@
+apiVersion: v2
+name: tekton-catalog-config 
+version: 0.1.0
+description: Configuration for this Catalog Components
+type: application
+keywords:
+  - ci
+  - cd
+  - tekton
+  - catalog
+  - config
+home: ttps://github.com/Continuous-X
+sources:
+  - ttps://github.com/Continuous-X/cx-tekton-catalog.git
+appVersion: 1.0.0
+deprecated: false

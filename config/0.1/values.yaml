@@ -1,0 +1,6 @@
+global:
+  namespace: "cx-tekton-catalog"
+  catalog:
+    pipeline:
+      config:
+        writemetricsactive: "true"

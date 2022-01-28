@@ -10,7 +10,10 @@ source ${basepath}/common.sh
 
 
 function help() {
-    echo "[HELP] call script '${scriptname}' with <NAMESPACE> <PIPELINE>"
+    echo """[HELP] call script '${scriptname}' with <NAMESPACE> <PIPELINE>
+    - NAMESPACE     - install in namespace: ${NAMESPACE}
+    - PIPELINE      - use pipeline name: ${PIPELINE}
+    """
 }
 
 

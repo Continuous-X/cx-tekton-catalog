@@ -9,7 +9,9 @@ source ${basepath}/common.sh
 
 
 function help() {
-    echo "[HELP] call script '${scriptname}' with <NAMESPACE>"
+    echo """[HELP] call script '${scriptname}' with <NAMESPACE>
+    - NAMESPACE     - install in namespace: ${NAMESPACE}
+    """
 }
 
 function installAllTrigger()
@@ -18,7 +20,7 @@ function installAllTrigger()
     do
         if [ -d "$triggerPath" ]; then
             echo "[INFO] take ${triggerPath} ${triggerPath##*/}"
-            source ${basepath}/trigger-install.sh "${NAMESPACE}" "${triggerPath##*/}" 
+            source ${basepath}/trigger-install.sh "${NAMESPACE}" "${triggerPath##*/}"
         fi
     done
 }

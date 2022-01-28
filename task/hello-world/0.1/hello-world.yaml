@@ -3,13 +3,60 @@ kind: Task
 metadata:
   name: hello-world-0.1
 spec:
+  params:
+    - name: configmapNameCatalogConfig
+      type: string
+      description: Name of config map for default onfig
+      default: "tekton-catalog-config-0.1.0"
+    - name: volumeNameCatalogConfig
+      type: string
+      description: Name of volume for default onfig
+      default: "catalog-config"
+    - name: volumePathCatalogConfig
+      type: string
+      description: path of volume for default onfig
+      default: "/tekton-catalog"
+  volumes:
+    - name: "$(params.volumeNameCatalogConfig)"
+      configMap:
+        name: "$(params.configmapNameCatalogConfig)"
+  results:
+    - name: pipeline-write-metrics-active
+      description: trigger for write pipeline metrics 
   steps:
-    - name: echo
+    - name: read-config
       image: registry.access.redhat.com/ubi8/ubi-micro:latest
-      script: |
+      volumeMounts:
+        - name: "$(params.volumeNameCatalogConfig)"
+          mountPath: "$(params.volumePathCatalogConfig)/$(params.volumeNameCatalogConfig)"
+      script: |-
         #!/usr/bin/env bash
-        set -xe
-        echo "Hello World! :)"
 
-        id
+        date
+
+        pwd
         ls -la
+        
+        echo "volume path: $(params.volumePathCatalogConfig)"
+        ls -la $(params.volumePathCatalogConfig)
+        
+        echo "volume config path: $(params.volumePathCatalogConfig)/$(params.volumeNameCatalogConfig)"
+        ls -la $(params.volumePathCatalogConfig)/$(params.volumeNameCatalogConfig)
+        cat $(params.volumePathCatalogConfig)/$(params.volumeNameCatalogConfig)/pipeline-write-metrics-active | tee $(results.pipeline-write-metrics-active.path)
+        
+        ls -la $(params.volumePathCatalogConfig)/$(params.volumeNameCatalogConfig)
+
+        date
+    - name: read-result
+      image: registry.access.redhat.com/ubi8/ubi-micro:latest
+      script: |-
+        #!/usr/bin/env bash
+
+        date
+
+        ls -la /tekton/results
+
+        echo "result path: $(results.pipeline-write-metrics-active.path)"
+        cat $(results.pipeline-write-metrics-active.path)
+
+        date

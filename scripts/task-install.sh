@@ -10,7 +10,10 @@ source ${basepath}/common.sh
 
 
 function help() {
-    echo "[HELP] call script '${scriptname}' with <NAMESPACE> <TASKNAME>"
+    echo """[HELP] call script '${scriptname}' with <NAMESPACE> <TASKNAME>
+    - NAMESPACE     - install in namespace: ${NAMESPACE}
+    - TASKNAME      - use task name: ${TASKNAME}
+    """
 }
 
 

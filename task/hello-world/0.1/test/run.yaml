@@ -6,3 +6,6 @@ spec:
   serviceAccountName: pipeline
   taskRef:
     name: hello-world-0.1
+  params:
+    - name: "configmapNameCatalogConfig"
+      value: "cm-hello-world-test-0.1"

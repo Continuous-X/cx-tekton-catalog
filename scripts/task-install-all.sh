@@ -9,7 +9,9 @@ source ${basepath}/common.sh
 
 
 function help() {
-    echo "[HELP] call script '${scriptname}' with <NAMESPACE>"
+    echo """[HELP] call script '${scriptname}' with <NAMESPACE>
+    - NAMESPACE     - install in namespace: ${NAMESPACE}
+    """
 }
 
 function installAllTask()

@@ -16,6 +16,14 @@ function checkParam2() {
     fi
 }
 
+function checkParam3() {
+    echo "checking param 3: $3"
+    if [ -z "$3" ]; then 
+        help
+        exit 1
+    fi
+}
+
 function getTektonSourcesInNamespace() {
     echo """
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

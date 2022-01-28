@@ -1,0 +1,18 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+  namespace: "{{ .Values.global.namespace }}"
+  annotations:
+    installdate: {{ dateInZone "2006-01-02T15:04:05" (now) "UTC" }}
+  labels:
+    app: "{{ .Chart.Name }}"
+    version: "{{ .Chart.Version }}"
+data:
+{{- if .Values.catalog }}
+  # Do something
+  pipeline-write-metrics-active: "{{ .Values.catalog.pipeline.config.writemetricsactive }}"
+{{ else }}
+  # Default case
+  pipeline-write-metrics-active: "{{ .Values.global.catalog.pipeline.config.writemetricsactive }}"
+{{- end }}

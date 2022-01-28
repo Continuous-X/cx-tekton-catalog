@@ -16,12 +16,17 @@ function help() {
     """
 }
 
+
+function installAllConfigVersions()
+{
+    for versionPath in ${basepath}/../config/*
+    do
+        echo "[INFO] take ${versionPath} ${versionPath##*/}"
+        source ${basepath}/config-install.sh "${NAMESPACE}" "${versionPath##*/}" "${CUSTOMER_VALUES}"
+    done
+}
+
 checkParam1 "$@"
 checkParam2 "$@"
 
-source ${basepath}/config-install-all.sh "$@"
-source ${basepath}/task-install-all.sh "$@"
-source ${basepath}/pipeline-install-all.sh "$@"
-source ${basepath}/trigger-install-all.sh "$@"
-
-getTektonSourcesInNamespace "${NAMESPACE}"
+installAllConfigVersions
