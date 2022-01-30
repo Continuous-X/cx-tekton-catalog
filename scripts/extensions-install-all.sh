@@ -17,16 +17,16 @@ function help() {
 }
 
 
-function installAllConfigVersions()
+function installAllExtensionsVersions()
 {
-    for versionPath in ${basepath}/../config/*
+    for versionPath in ${basepath}/../extensions/*
     do
         echo "[INFO] take ${versionPath} ${versionPath##*/}"
-        source ${basepath}/config-install.sh "${NAMESPACE}" "${versionPath##*/}" "${CUSTOMER_VALUES}"
+        source ${basepath}/extensions-install.sh "${NAMESPACE}" "${versionPath##*/}" "${CUSTOMER_VALUES}"
     done
 }
 
 checkParam1 "$@"
 checkParam2 "$@"
 
-installAllConfigVersions
+installAllExtensionsVersions

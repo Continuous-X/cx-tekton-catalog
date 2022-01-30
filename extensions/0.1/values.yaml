@@ -1,5 +1,5 @@
 global:
-  namespace: "cx-tekton-catalog"
+  namespace: "deliver-own-namespace"
   catalog:
     pipeline:
       config:

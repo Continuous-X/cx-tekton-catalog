@@ -1,0 +1,22 @@
+apiVersion: v2
+name: tekton-catalog-extensions 
+version: 0.1.0
+description: Extensions for this Catalog
+type: application
+keywords:
+  - ci
+  - cd
+  - tekton
+  - catalog
+  - config
+  - extensions
+home: ttps://github.com/Continuous-X
+sources:
+  - ttps://github.com/Continuous-X/cx-tekton-catalog.git
+appVersion: 1.0.0
+deprecated: false
+dependencies:
+  - name: "catalog-config"
+    version: 0.1.0
+  - name: "catalog-iam"
+    version: 0.1.0

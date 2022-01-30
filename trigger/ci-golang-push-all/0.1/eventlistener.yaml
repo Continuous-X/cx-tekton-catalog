@@ -3,7 +3,7 @@ kind: EventListener
 metadata:
   name: ci-golang-push-all-0.1
 spec:
-  serviceAccountName: default
+  serviceAccountName: pipeline
   triggers:
     - name: ci-golang-0.1
       bindings:

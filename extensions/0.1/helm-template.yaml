@@ -1,0 +1,73 @@
+---
+# Source: tekton-catalog-extensions/charts/catalog-iam/templates/sa.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: "pipeline"
+  namespace: "local-catalog-test"
+  labels:
+    app: "catalog-iam"
+    version: "0.1.0"
+---
+# Source: tekton-catalog-extensions/charts/catalog-config/templates/configmap-catalog-config.yaml
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: "catalog-config-0.1.0"
+  namespace: "local-catalog-test"
+  annotations:
+    installdate: 2022-01-30T18:58:39
+  labels:
+    app: "catalog-config"
+    version: "0.1.0"
+data:
+  # Do something
+  pipeline-write-metrics-active: "true"
+---
+# Source: tekton-catalog-extensions/charts/catalog-iam/templates/role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: "catalog-iam-edit-0.1.0"
+  namespace: "local-catalog-test"
+  labels:
+    app: "catalog-iam"
+    version: "0.1.0"
+rules:
+# EventListeners need to be able to fetch all namespaced resources
+- apiGroups: ['triggers.tekton.dev']
+  resources: ['eventlisteners', 'triggerbindings', 'triggertemplates', 'triggers']
+  verbs: ['get', 'list', 'watch']
+- apiGroups: ['tekton.dev']
+  resources: ['pipelineruns', 'pipelineresources', 'taskruns']
+  verbs: ['get', 'list', 'watch', 'create']
+#- apiGroups: ['']
+#  # secrets are only needed for GitHub/GitLab interceptors
+#  # configmaps is needed for updating logging config
+#  resources: ['configmaps', 'secrets']
+#  verbs: ['get', 'list', 'watch']
+#  # Permissions to create resources in associated TriggerTemplates
+#- apiGroups: ['']
+#  resources: ['serviceaccounts']
+#  verbs: ['impersonate']
+#- apiGroups: ['policy']
+#  resources: ['podsecuritypolicies']
+#  resourceNames: ['tekton-triggers']
+#  verbs: ['use']
+---
+# Source: tekton-catalog-extensions/charts/catalog-iam/templates/rolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: "catalog-iam-edit-0.1.0"
+  namespace: "local-catalog-test"
+  labels:
+    app: "catalog-iam"
+    version: "0.1.0"
+subjects:
+- kind: ServiceAccount
+  name: "pipeline"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: "catalog-iam-edit-0.1.0"
