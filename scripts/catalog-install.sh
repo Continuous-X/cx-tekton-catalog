@@ -19,7 +19,7 @@ function help() {
 checkParam1 "$@"
 checkParam2 "$@"
 
-source ${basepath}/config-install-all.sh "$@"
+source ${basepath}/extensions-install-all.sh "CUSTOMER_VALUES"
 source ${basepath}/task-install-all.sh "$@"
 source ${basepath}/pipeline-install-all.sh "$@"
 source ${basepath}/trigger-install-all.sh "$@"

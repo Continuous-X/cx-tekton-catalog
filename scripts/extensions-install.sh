@@ -2,17 +2,15 @@
 
 #set -x
 
-NAMESPACE=$1
-EXTENSION_VERSION=$2
-CUSTOMER_VALUES=$3
+EXTENSION_VERSION=$1
+CUSTOMER_VALUES=$2
 scriptname=$(basename "$0")
 basepath=$(cd $(dirname "$0") && pwd)
 source ${basepath}/common.sh
 
 
 function help() {
-    echo """[HELP] call script '${scriptname}' with <NAMESPACE> <EXTENSION_VERSION> <CUSTOMER_VALUES>
-    - NAMESPACE         - install in namespace: ${NAMESPACE}
+    echo """[HELP] call script '${scriptname}' with <EXTENSION_VERSION> <CUSTOMER_VALUES>
     - EXTENSION_VERSION - use extension version: ${EXTENSION_VERSION}
     - CUSTOMER_VALUES   - use cusomter values: ${CUSTOMER_VALUES}
     """
@@ -39,7 +37,6 @@ function installExtensionsVersion()
 
 checkParam1 "$@"
 checkParam2 "$@"
-checkParam3 "$@"
 
 help
 

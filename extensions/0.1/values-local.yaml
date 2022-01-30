@@ -1,5 +1,5 @@
 global:
-  namespace: "local-catalog-test"
+  namespace: "local-cicd-helheim"
 catalog:
   pipeline:
     config:

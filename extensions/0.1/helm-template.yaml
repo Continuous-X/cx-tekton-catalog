@@ -4,7 +4,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: "pipeline"
-  namespace: "local-catalog-test"
+  namespace: "local-cicd-helheim"
   labels:
     app: "catalog-iam"
     version: "0.1.0"
@@ -14,9 +14,9 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: "catalog-config-0.1.0"
-  namespace: "local-catalog-test"
+  namespace: "local-cicd-helheim"
   annotations:
-    installdate: 2022-01-30T18:58:39
+    installdate: 2022-01-30T19:14:01
   labels:
     app: "catalog-config"
     version: "0.1.0"
@@ -29,7 +29,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: "catalog-iam-edit-0.1.0"
-  namespace: "local-catalog-test"
+  namespace: "local-cicd-helheim"
   labels:
     app: "catalog-iam"
     version: "0.1.0"
@@ -60,7 +60,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: "catalog-iam-edit-0.1.0"
-  namespace: "local-catalog-test"
+  namespace: "local-cicd-helheim"
   labels:
     app: "catalog-iam"
     version: "0.1.0"

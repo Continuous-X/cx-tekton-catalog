@@ -2,17 +2,15 @@
 
 #set -x
 
-NAMESPACE=$1
-EXTENSIONS_VERSION=$2
-CUSTOMER_VALUES=$3
+EXTENSIONS_VERSION=$1
+CUSTOMER_VALUES=$2
 scriptname=$(basename "$0")
 basepath=$(cd $(dirname "$0") && pwd)
 source ${basepath}/common.sh
 
 
 function help() {
-    echo """[HELP] call script '${scriptname}' with <NAMESPACE> <EXTENSIONS_VERSION> <CUSTOMER_VALUES>
-    - NAMESPACE             - delete in namespace: ${NAMESPACE}
+    echo """[HELP] call script '${scriptname}' with <EXTENSIONS_VERSION> <CUSTOMER_VALUES>
     - EXTENSIONS_VERSION    - use extensions version: ${EXTENSIONS_VERSION}
     - CUSTOMER_VALUES       - use cusomter values: ${CUSTOMER_VALUES}
     """
@@ -38,7 +36,6 @@ function deleteExtensionsVersion()
 
 checkParam1 "$@"
 checkParam2 "$@"
-checkParam3 "$@"
 
 help
 
