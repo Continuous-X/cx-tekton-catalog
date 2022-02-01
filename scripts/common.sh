@@ -44,24 +44,17 @@ Get Tekton Sources in '$1'
 
     echo """
 
-    trigger-templates in namespace '$1':
+    trigger-templates, trigger-bindings, event-listener in namespace '$1':
     --------------------------------------------
     """
-    kubectl get tt -n "$1"
+    kubectl get tt, tb, el -n "$1"
 
     echo """
 
-    trigger-bindings in namespace '$1':
+    trigger-templates, trigger-bindings, event-listener in namespace '$1':
     --------------------------------------------
     """
-    kubectl get tb -n "$1"
-
-    echo """
-
-    event-listener in namespace '$1':
-    --------------------------------------------
-    """
-    kubectl get el -n "$1"
+    kubectl get configmap -n "$1" -l app=cx-tekton-catalog
 
     echo """
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

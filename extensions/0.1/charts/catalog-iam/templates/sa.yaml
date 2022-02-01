@@ -5,5 +5,5 @@ metadata:
   name: "{{ .Values.serviceAccountNames.pipeline}}"
   namespace: "{{ .Values.global.namespace }}"
   labels:
-    app: "{{ .Chart.Name }}"
+    app: "{{ .Values.global.label.app }}"
     version: "{{ .Chart.Version }}"

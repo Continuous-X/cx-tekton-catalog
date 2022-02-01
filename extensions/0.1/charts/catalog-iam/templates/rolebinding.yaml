@@ -5,7 +5,7 @@ metadata:
   name: "{{ .Chart.Name }}-edit-{{ .Chart.Version }}"
   namespace: "{{ .Values.global.namespace }}"
   labels:
-    app: "{{ .Chart.Name }}"
+    app: "{{ .Values.global.label.app }}"
     version: "{{ .Chart.Version }}"
 subjects:
 - kind: ServiceAccount

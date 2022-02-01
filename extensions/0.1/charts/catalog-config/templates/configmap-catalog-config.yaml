@@ -6,13 +6,7 @@ metadata:
   annotations:
     installdate: {{ dateInZone "2006-01-02T15:04:05" (now) "UTC" }}
   labels:
-    app: "{{ .Chart.Name }}"
+    app: "{{ .Values.global.label.app }}"
     version: "{{ .Chart.Version }}"
 data:
-{{- if .Values.catalog }}
-  # Do something
-  pipeline-write-metrics-active: "{{ .Values.catalog.pipeline.config.writemetricsactive }}"
-{{ else }}
-  # Default case
-  pipeline-write-metrics-active: "{{ .Values.global.catalog.pipeline.config.writemetricsactive }}"
-{{- end }}
+  pipeline-write-metrics-active: "{{ .Values.catalog.pipeline.config.writemetricsactive | default .Values.catalogDefaults.pipeline.config.writemetricsactive }}"

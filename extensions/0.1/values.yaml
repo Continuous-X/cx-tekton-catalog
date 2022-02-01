@@ -1,5 +1,6 @@
 global:
-  namespace: "deliver-own-namespace"
+  label:
+    app: "cx-tekton-catalog"
   catalog:
     pipeline:
       config:
