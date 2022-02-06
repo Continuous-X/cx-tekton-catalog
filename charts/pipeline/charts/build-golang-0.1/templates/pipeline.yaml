@@ -1,0 +1,35 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: "{{ .Chart.Name }}"
+  annotations:
+    installdate: {{ dateInZone "2006-01-02T15:04:05" (now) "UTC" }}
+  labels:
+    app.kubernetes.io/name: "{{ .Chart.Name }}"
+    app.kubernetes.io/instance: "{{ .Release.Name }}"
+    app.kubernetes.io/version: "{{ .Chart.Version }}"
+    app.kubernetes.io/component: "{{ .Values.component }}"
+    app.kubernetes.io/part-of: "{{ .Values.global.label.app }}"
+    app.kubernetes.io/managed-by: "{{ .Release.Service }}"
+    app.kubernetes.io/created-by: "{{ .Release.Service }}"
+spec:
+  params:
+    - name: git-url
+    - name: git-revision
+  resources:
+    - name: pipeline-resource-type
+      type: pipeline-type
+  workspaces:
+    - name: source
+  tasks:
+    - name: git-clone
+      taskRef:
+        name: git-clone
+      params:
+      - name: url
+        value: "$(params.git-url)"
+      - name: revision
+        value: "$(params.git-revision)"
+      workspaces:
+        - name: output
+          workspace: source

@@ -1,0 +1,22 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: "{{ .Chart.Name }}"
+  annotations:
+    installdate: {{ dateInZone "2006-01-02T15:04:05" (now) "UTC" }}
+  labels:
+    app.kubernetes.io/name: "{{ .Chart.Name }}"
+    app.kubernetes.io/instance: "{{ .Release.Name }}"
+    app.kubernetes.io/version: "{{ .Chart.Version }}"
+    app.kubernetes.io/component: "{{ .Values.component }}"
+    app.kubernetes.io/part-of: "{{ .Values.global.label.app }}"
+    app.kubernetes.io/managed-by: "{{ .Release.Service }}"
+    app.kubernetes.io/created-by: "{{ .Release.Service }}"
+spec:
+  serviceAccountName: "{{ .Values.global.serviceacccounts.pipeline }}"
+  triggers:
+    - name: ci-golang-0.1
+      bindings:
+        - ref: ci-golang-0.1
+      template:
+        ref: ci-golang-0.1

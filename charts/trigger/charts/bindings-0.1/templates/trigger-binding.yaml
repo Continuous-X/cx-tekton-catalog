@@ -1,0 +1,19 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerBinding
+  name: "{{ .Chart.Name }}"
+  annotations:
+    installdate: {{ dateInZone "2006-01-02T15:04:05" (now) "UTC" }}
+  labels:
+    app.kubernetes.io/name: "{{ .Chart.Name }}"
+    app.kubernetes.io/instance: "{{ .Release.Name }}"
+    app.kubernetes.io/version: "{{ .Chart.Version }}"
+    app.kubernetes.io/component: "{{ .Values.component }}"
+    #app.kubernetes.io/part-of: "{{ .Values.global.labels.appname }}"
+    app.kubernetes.io/managed-by: "{{ .Release.Service }}"
+    app.kubernetes.io/created-by: "{{ .Release.Service }}"
+spec:
+  params:
+    - name: gitrevision
+      value: $(body.after)
+    - name: gitrepositoryurl
+      value: $(body.repository.clone_url)

@@ -1,0 +1,5 @@
+global:
+  labels:
+    appname: "cx-tekton-catalog"
+  serviceacccounts:
+    pipeline: "pipeline"

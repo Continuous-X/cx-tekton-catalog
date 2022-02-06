@@ -1,0 +1,18 @@
+apiVersion: v2
+name: "trigger" 
+version: 1.0.0
+description: tekton trigger
+type: application
+keywords:
+  - ci
+  - cd
+  - tekton
+  - trigger
+home: ttps://github.com/Continuous-X
+sources:
+  - ttps://github.com/Continuous-X/cx-tekton-catalog.git
+dependencies: 
+  - name: bindings-0.1
+    version: 0.1.0
+appVersion: 1.0.0
+deprecated: false

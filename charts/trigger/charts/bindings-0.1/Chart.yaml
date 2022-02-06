@@ -1,0 +1,15 @@
+apiVersion: v2
+name: "bindings-0.1" 
+version: 0.1.0
+description: tekton triggers - bindings  
+type: application
+keywords:
+  - ci
+  - cd
+  - tekton
+  - task
+home: ttps://github.com/Continuous-X
+sources:
+  - ttps://github.com/Continuous-X/cx-tekton-catalog.git
+appVersion: 1.0.0
+deprecated: false

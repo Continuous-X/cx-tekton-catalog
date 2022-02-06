@@ -1,0 +1,17 @@
+apiVersion: v2
+name: "cx-tekton-catalog" 
+version: 1.0.0
+description: cx tekton catalog
+type: application
+keywords:
+  - ci
+  - cd
+  - tekton
+home: ttps://github.com/Continuous-X
+sources:
+  - ttps://github.com/Continuous-X/cx-tekton-catalog.git
+dependencies: 
+  - name: pipeline
+    version: 1.0.0
+appVersion: 1.0.0
+deprecated: false

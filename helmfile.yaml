@@ -1,0 +1,7 @@
+releases:
+- name: local-dev
+  namespace: local-catalog-dev
+  chart: stable/prometheus
+  set:
+  - name: rbac.create
+    value: false

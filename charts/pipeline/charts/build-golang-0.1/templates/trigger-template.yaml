@@ -1,0 +1,37 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerTemplate
+metadata:
+  name: "{{ .Chart.Name }}"
+  annotations:
+    installdate: {{ dateInZone "2006-01-02T15:04:05" (now) "UTC" }}
+  labels:
+    app.kubernetes.io/name: "{{ .Chart.Name }}"
+    app.kubernetes.io/instance: "{{ .Release.Name }}"
+    app.kubernetes.io/version: "{{ .Chart.Version }}"
+    app.kubernetes.io/component: "{{ .Values.component }}"
+    app.kubernetes.io/part-of: "{{ .Values.global.label.app }}"
+    app.kubernetes.io/managed-by: "{{ .Release.Service }}"
+    app.kubernetes.io/created-by: "{{ .Release.Service }}"
+spec:
+  params:
+    - name: gitrevision
+      description: The git revision
+      default: staging
+    - name: gitrepositoryurl
+      description: The git repository url
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
+      metadata:
+        generateName: "{{ .Chart.Name }}-"
+        labels:
+          tekton.dev/pipeline: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+      spec:
+        serviceAccountName: "{{ .Values.global.serviceacccounts.pipeline }}"
+        pipelineRef:
+          name: "{{ .Chart.Name }}"
+        params:
+          - name: github-repo-url
+            value: '$(tt.params.gitrepositoryurl)'
+          - name: github-repo-revision
+            value: '$(tt.params.gitrevision)'

@@ -1,6 +1,15 @@
 # cx-tekton-catalog
 simple tekton catalog
 
+## Motivation
+Die Bereitstellung von Tekton Elementen erfolgt recht simpel in Verzeichnisstrukturen. Wenn es um die Bereitstellung und den Lifecycle aller Elemente geht, scheint man auf sich allein gestellt zu sein. 
+
+Genau wie produktive Anwendungen sind CI/CD Werkzeuge angreifbar und sollten die hoffentlich existierende gleiche Achtsamkeit erhalten. Kontinuierliche Überprüfungen auf bekannte Schwachstellen, die Lauffähigkeit der angebotenen Features und der Lifecycle eingebundener Abhängigkeiten sollten nie aus dem Auge verloren gehen.
+
+Wer veraltete und kaputte CI/CD Werkzeuge einsetzt sollte sich nicht bescheren, wenn er kaputte Software baut und ausliefert.
+
+![](docs/20180611-effectgroep_shit_in.png)
+
 ## Installation / Bereitstellung des Kataloges
 
 ### Voraussetzungen

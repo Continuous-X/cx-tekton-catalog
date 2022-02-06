@@ -1,0 +1,71 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+  name: "{{ .Chart.Name }}"
+  annotations:
+    installdate: {{ dateInZone "2006-01-02T15:04:05" (now) "UTC" }}
+  labels:
+    app.kubernetes.io/name: "{{ .Chart.Name }}"
+    app.kubernetes.io/instance: "{{ .Release.Name }}"
+    app.kubernetes.io/version: "{{ .Chart.Version }}"
+    app.kubernetes.io/component: "{{ .Values.component }}"
+    app.kubernetes.io/part-of: "{{ .Values.global.label.app }}"
+    app.kubernetes.io/managed-by: "{{ .Release.Service }}"
+    app.kubernetes.io/created-by: "{{ .Release.Service }}"
+spec:
+  params:
+    - name: configmapNameCatalogConfig
+      type: string
+      description: Name of config map for default onfig
+      default: "tekton-catalog-config-0.1.0"
+    - name: volumeNameCatalogConfig
+      type: string
+      description: Name of volume for default onfig
+      default: "catalog-config"
+    - name: volumePathCatalogConfig
+      type: string
+      description: path of volume for default onfig
+      default: "/tekton-catalog"
+  volumes:
+    - name: "$(params.volumeNameCatalogConfig)"
+      configMap:
+        name: "$(params.configmapNameCatalogConfig)"
+  results:
+    - name: pipeline-write-metrics-active
+      description: trigger for write pipeline metrics 
+  steps:
+    - name: read-config
+      image: registry.access.redhat.com/ubi8/ubi-micro:latest
+      volumeMounts:
+        - name: "$(params.volumeNameCatalogConfig)"
+          mountPath: "$(params.volumePathCatalogConfig)/$(params.volumeNameCatalogConfig)"
+      script: |-
+        #!/usr/bin/env bash
+
+        date
+
+        pwd
+        ls -la
+        
+        echo "volume path: $(params.volumePathCatalogConfig)"
+        ls -la $(params.volumePathCatalogConfig)
+        
+        echo "volume config path: $(params.volumePathCatalogConfig)/$(params.volumeNameCatalogConfig)"
+        ls -la $(params.volumePathCatalogConfig)/$(params.volumeNameCatalogConfig)
+        cat $(params.volumePathCatalogConfig)/$(params.volumeNameCatalogConfig)/pipeline-write-metrics-active | tee $(results.pipeline-write-metrics-active.path)
+        
+        ls -la $(params.volumePathCatalogConfig)/$(params.volumeNameCatalogConfig)
+
+        date
+    - name: read-result
+      image: registry.access.redhat.com/ubi8/ubi-micro:latest
+      script: |-
+        #!/usr/bin/env bash
+
+        date
+
+        ls -la /tekton/results
+
+        echo "result path: $(results.pipeline-write-metrics-active.path)"
+        cat $(results.pipeline-write-metrics-active.path)
+
+        date
